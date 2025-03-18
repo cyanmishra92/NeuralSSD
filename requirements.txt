@@ -1,0 +1,14 @@
+# Core dependencies
+torch>=1.9.0
+torchvision>=0.10.0
+numpy>=1.19.0
+pillow>=8.0.0
+matplotlib>=3.3.0
+tqdm>=4.50.0
+tensorboard>=2.4.0
+opencv-python>=4.5.0
+
+# For development
+pytest>=6.0.0
+pylint>=2.6.0
+black>=21.5b2

@@ -1,0 +1,90 @@
+{
+    "base_layer": {
+        "latent_dim": 128,
+        "encoder_channels": [
+            64,
+            128,
+            256
+        ],
+        "decoder_channels": [
+            256,
+            128,
+            64
+        ],
+        "kernel_size": 3,
+        "activation": "relu",
+        "use_attention": true
+    },
+    "data": {
+        "dataset_name": "video",
+        "dataset_path": "/scratch/cxm2114/thishome/Research/SALT/layered_neural_codec/data/valid_videos",
+        "frame_size": [
+            256,
+            256
+        ],
+        "sequence_length": 8,
+        "batch_size": 4,
+        "num_workers": 4,
+        "train_val_split": 0.8,
+        "augmentations": true
+    },
+    "enhancement_layer": {
+        "num_layers": 2,
+        "latent_dims": [
+            64,
+            32
+        ],
+        "roi_enabled": true,
+        "roi_weight_factor": 2.0
+    },
+    "feature_extraction": {
+        "model_type": "mobilenet",
+        "pretrained": true,
+        "freeze_backbone": false,
+        "feature_dim": 512
+    },
+    "logging": {
+        "log_dir": "./logs",
+        "experiment_name": "layered_codec",
+        "save_dir": "./checkpoints",
+        "metrics": [
+            "psnr",
+            "msssim",
+            "bpp"
+        ],
+        "plot_interval": 100,
+        "plot_save_path": "./plots"
+    },
+    "loss": {
+        "lambda_perceptual": 0.1,
+        "lambda_temporal": 0.05,
+        "lambda_rate": 0.001,
+        "perceptual_type": "vgg",
+        "perceptual_layers": [
+            "conv1_2",
+            "conv2_2",
+            "conv3_3"
+        ]
+    },
+    "motion_estimation": {
+        "method": "raft",
+        "flow_checkpoint": null,
+        "refinement_layers": 3,
+        "refinement_channels": 64,
+        "warp_padding_mode": "border"
+    },
+    "training": {
+        "num_epochs": 5,
+        "learning_rate": 0.0001,
+        "weight_decay": 1e-05,
+        "scheduler_type": "cosine",
+        "scheduler_params": {
+            "T_max": 100
+        },
+        "clip_grad_norm": 1.0,
+        "anchor_frame_interval": 5,
+        "log_interval": 10,
+        "save_interval": 5,
+        "val_interval": 1
+    }
+}
