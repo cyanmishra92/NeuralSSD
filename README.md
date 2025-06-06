@@ -162,7 +162,7 @@ If you use this code for your research, please cite our work:
 ```bibtex
 @article{layered_neural_codec,
   title={Layered Neural Codec: A Modular Approach to Video Compression},
-  author={Your Name},
+  author={Cyan Subhra Mishra},
   journal={arXiv preprint},
   year={2023}
 }
